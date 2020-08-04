@@ -7,13 +7,10 @@ import numpy as np
 # Generación de la señal discreta de entrada
 fm = 8000
 Tm= 1/fm
-f1 = 0.05
-f2=0.47
+f = 100
 N = int((0.1-Tm)/Tm)
-n = np.linspace(0,(40-Tm),num=N)
-s1=np.cos(2*math.pi*f1*n)
-s2=np.cos(2*math.pi*f2*n)
-s=s1+s2
+n = np.linspace(0,(0.1-Tm),num=N)
+s=np.cos(2*math.pi*f*n)
 r=0.5*(0.5-np.random.rand(N))
 x = s+r
 # Implementación del Filtro Promedio Móvil
