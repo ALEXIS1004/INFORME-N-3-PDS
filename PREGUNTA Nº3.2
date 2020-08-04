@@ -1,0 +1,37 @@
+from scipy import signal
+import matplotlib.pyplot as plt
+import math
+import numpy as np
+
+
+# Generación de la señal discreta de entrada
+fm = 8000
+Tm= 1/fm
+f = 100
+N = int((0.1-Tm)/Tm)
+n = np.linspace(0,(0.1-Tm),num=N)
+s=np.cos(2*math.pi*f*n)
+r=0.5*(0.5-np.random.rand(N))
+x = s+r
+# Implementación del Filtro Promedio Móvil
+M=8
+num =np.array([1,-1,1,-1,1,-1,1,-1])
+y=signal.lfilter(num,1,x)/M;
+
+# Presentación de la señal discreta de la entrada y salida
+plt.subplot(2,2,1)
+plt.plot(n, s,'-')
+plt.xlabel('Time [n]')
+plt.ylabel('Señal')
+plt.subplot(2,2,2)
+plt.plot(n, r,'.')
+plt.xlabel('Time [n]')
+plt.ylabel('Ruido')
+plt.subplot(2,2,3)
+plt.plot(n, x,'.')
+plt.xlabel('Time [n]')
+plt.ylabel('Señal ruidosa')
+plt.subplot(2,2,4)
+plt.plot(n, y,'-')
+plt.xlabel('Time [n]')
+plt.ylabel('Señal Filtrada')
