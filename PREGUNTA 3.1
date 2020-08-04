@@ -14,24 +14,36 @@ s=np.cos(2*math.pi*f*n)
 r=0.5*(0.5-np.random.rand(N))
 x = s+r
 # Implementación del Filtro Promedio Móvil
-M=3
-num =np.ones(M)
-y=signal.lfilter(num,1,x)/M;
-
+M1=3
+num1=np.ones(M1)
+y1=signal.lfilter(num1,1,x)/M1;
+M2=8
+num2=np.ones(M2)
+y2=signal.lfilter(num2,1,x)/M2;
+# Comparamos ambas señales restandolas 
+yt=y1-y2
 # Presentación de la señal discreta de la entrada y salida
-plt.subplot(2,2,1)
+plt.subplot(3,2,1)
 plt.plot(n, s,'-')
 plt.xlabel('Time [n]')
 plt.ylabel('Señal')
-plt.subplot(2,2,2)
+plt.subplot(3,2,2)
 plt.plot(n, r,'.')
 plt.xlabel('Time [n]')
 plt.ylabel('Ruido')
-plt.subplot(2,2,3)
+plt.subplot(3,2,3)
 plt.plot(n, x,'.')
 plt.xlabel('Time [n]')
 plt.ylabel('Señal ruidosa')
-plt.subplot(2,2,4)
-plt.plot(n, y,'-')
+plt.subplot(3,2,4)
+plt.plot(n, y1,'-')
 plt.xlabel('Time [n]')
-plt.ylabel('Señal Filtrada')
+plt.ylabel('Señal Filtrada con M=3')
+plt.subplot(3,2,5)
+plt.plot(n, y2,'-')
+plt.xlabel('Time [n]')
+plt.ylabel('Señal Filtrada con M=8')
+plt.subplot(3,2,6)
+plt.plot(n, yt,'-')
+plt.xlabel('Time [n]')
+plt.ylabel('Diferencia de Señales')
