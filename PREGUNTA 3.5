@@ -1,34 +1,62 @@
+
+# -----------------------------------------------------------
+# Laboratorio N° 3: Ejercicio 3.5
+# Convolución en tiempo continuo
+# -----------------------------------------------------------
+import numpy as np
 from scipy import signal
+import numpy as np
 import matplotlib.pyplot as plt
 import math
-import numpy as np
-n = np.linspace(0,40,41)
-k=10
-xn = np.cos(2*math.pi*0.0625*n)+np.cos(2*math.pi*0.625*n)
+%matplotlib inline
 
-M=4
+# INGRESO
+b = 2.5 
+t=np.linspace(-b,b,1000)
+x=np.zeros(len(t))
+# DEFINE LOS VALORES DONDE SE DEFINE X
+xmin=-1
+xmax=1
+# FUNCIÓN DE X
+funcx=1
+for i in range (len(t)):
+  if t[i]>=xmin:
+    if t[i]<=xmax:
+      x[i]=funcx
 
-xnk= np.concatenate((np.zeros(k),xn))
-xnk.shape
+h=np.zeros(len(t)) 
+# DEFINE LOS VALORES DONDE SE DEFINE X
+ymin=-1
+ymax=1
+# FUNCIÓN DE X
+funcy=1
+for i in range (len(t)):
+  if t[i]>=ymin:
+    if t[i]<=ymax:
+      h[i]=funcy
 
-num = np.ones(M)
-den=1
 
-yn = signal.lfilter(num,den,xn)/M;
-ynk = signal.lfilter(num,den,xnk)/M;
-difn = yn - ynk[k:41+k]
+# PROCEDIMIENTO
 
-plt.subplot(3,1,1)
-plt.stem(n,yn)
-plt.xlabel('Time [n]')
-plt.ylabel('Señal Filtrada')
+# Integral de Convolucion x[t]*h[t]
+y = np.convolve(x,h,'same')*0.005
 
-plt.subplot(3,1,2)
-plt.stem(n,ynk[1:42])
-plt.xlabel('Time [n]')
-plt.ylabel('Señal retardada')
+plt.figure(1)
+plt.plot(t,x,'b', label='x(t)')
+plt.title('Señal x(t)')
+plt.legend()
+plt.grid()
 
-plt.subplot(3,1,3)
-plt.plot(n,difn,'.')
-plt.xlabel('Time [n]')
-plt.ylabel('Señal diferencia')
+plt.figure(2)
+plt.plot(t,h,'r', label='h(t)')
+plt.title('Señal h(t)')
+plt.legend()
+plt.grid()
+
+plt.figure(3)
+plt.plot(t,y,'m', label='x(t)*h(t)')
+plt.xlabel('t')
+plt.title('Integral de Convolución x(t)*h(t)')
+plt.legend()
+plt.grid()
+plt.show()
