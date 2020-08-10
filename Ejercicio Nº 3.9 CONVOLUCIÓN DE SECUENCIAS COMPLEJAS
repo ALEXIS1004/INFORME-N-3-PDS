@@ -1,0 +1,69 @@
+# -----------------------------------------------------------
+# Laboratorio N° 3: Ejercicio 3.9
+# Convolución en tiempo discreto
+#Determina la parte real e imaginaria de la secuencia resultante de la convolución de dos secuencias
+#complejas x[n] = xr[n] + jxi[n] e y[n] = yr[n] + jyi[n].
+# -----------------------------------------------------------
+import numpy as np
+from scipy import signal
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+%matplotlib inline
+
+# INGRESO
+
+A=1
+n=np.linspace(0,50,51)
+x1=A*np.exp((complex(0,1)*n)/4)
+
+
+y1=A*np.exp((complex(0,1)*n)/6)
+# PROCEDIMIENTO
+
+# Integral de Convolucion x[t]*h[t]
+x = np.convolve(x1,y1,'same')
+
+plt.figure(1)
+plt.stem(n,np.real(x1),'b', label='parte real de x[n]')
+plt.title('Señal x[n]')
+plt.legend()
+plt.grid()
+
+plt.figure(2)
+plt.stem(n,np.imag(x1),'r', label='parte imaginaria de x[n]')
+plt.title('Señal x[n]')
+plt.legend()
+plt.grid()
+
+plt.figure(3)
+plt.stem(n,np.real(y1),'m', label='parte real de y[n]')
+plt.xlabel('n')
+plt.title('Señal h[n]')
+plt.legend()
+plt.grid()
+
+plt.figure(4)
+plt.stem(n,np.imag(y1),'y', label='parte imaginaria de y[n]')
+plt.xlabel('n')
+plt.title('Señal h[n]')
+plt.legend()
+plt.grid()
+
+
+plt.figure(5)
+plt.stem(n,np.real(x),'m', label='parte real de convolución')
+plt.xlabel('n')
+plt.title('Convolución x[n]')
+plt.legend()
+plt.grid()
+
+plt.figure(6)
+plt.stem(n,np.imag(x),'y', label='parte imaginaria de convolución')
+plt.xlabel('n')
+plt.title('Convolución x[n]')
+plt.legend()
+plt.grid()
+
+
+plt.show()
