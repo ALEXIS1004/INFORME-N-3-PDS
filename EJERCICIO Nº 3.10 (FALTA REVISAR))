@@ -1,0 +1,48 @@
+# -----------------------------------------------------------
+# Laboratorio N° 3: Ejercicio 3.10
+# Convolución en tiempo discreto
+#Determina la parte real e imaginaria de la secuencia resultante de la convolución de dos secuencias
+#complejas x[n] = xr[n] + jxi[n] e y[n] = yr[n] + jyi[n].
+# -----------------------------------------------------------
+import numpy as np
+from scipy import signal
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+%matplotlib inline
+
+
+
+def compConv(entrada1,entrada2):
+  x=entrada1
+  h=entrada2
+  m=len(x)
+  n=len(h)
+  z1=np.zeros(n)
+  z2=np.zeros(m)
+  X=x
+  X.append(z1)
+  H=h
+  H.append(z2)
+  Y=np.zeros(n+m-1)
+  for a in range(n+m-1):
+    Y[a]=0
+    for b in range(m):
+      if a-b+1>0:
+        Y[a]=Y[a]+X[b]*H[a-b+1]
+
+  salidaRe=np.real(Y)
+  salidaIm=np.imag(Y)
+  reY=np.linspace(1,n+m-1,n+m-1)
+
+  plt.figure(1)
+  plt.stem(reY,salidaRe,'b', label='parte real de x[n]')
+  plt.title('Señal x[n]')
+  plt.legend()
+  plt.grid()
+
+  plt.show()
+
+en1=[complex(2,3),complex(-2,6),complex(3,-4)]
+en2=[complex(2,3),complex(-2,6),complex(3,-4)]
+compConv(en1,en2)
