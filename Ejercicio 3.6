@@ -1,0 +1,87 @@
+# -----------------------------------------------------------
+# Laboratorio N° 3: Ejercicio 3.6
+# Convolución en tiempo discreto
+# -----------------------------------------------------------
+
+import numpy as np
+from scipy import signal
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+%matplotlib inline
+
+# Secuencia x[n]
+# ------------------------------------
+xn=np.linspace(-70,70,141)
+x1=np.zeros(70)
+x=x1
+x=np.append(x,np.ones(40))
+x1=np.zeros(31)
+x=np.append(x,x1)
+
+#------------------------------------
+# Secuencia v[n]
+# ------------------------------------
+vn=np.linspace(-70,70,141)
+v1=np.zeros(45)
+v=v1
+v=np.append(v,np.ones(58))
+v1=np.zeros(38)
+v=np.append(v,v1)
+#------------------------------------
+# Secuencia w[n]
+# ------------------------------------
+wn=np.linspace(-70,70,141)
+w1=np.zeros(29)
+w=w1
+w=np.append(w,np.ones(26))
+w1=np.zeros(86)
+w=np.append(w,w1)
+
+#------------------------------------
+# Convolución x[n]*v[n]
+# ------------------------------------
+conv1=np.convolve(x,v,'same')
+#------------------------------------
+# Convolución v[n]*w[n]
+# ------------------------------------
+conv2=np.convolve(v,w,'same')
+#------------------------------------
+# Convolución x[n]*w[n]
+# ------------------------------------
+conv3=np.convolve(x,w,'same')
+
+#GRAFICAMOS
+#--------------------------------------
+plt.figure(1)
+plt.stem(xn,x,'m')
+plt.title('Señal x[n]')
+plt.grid()
+
+plt.figure(2)
+plt.stem(vn,v,'r')
+plt.title('Señal v[n]')
+plt.grid()
+
+plt.figure(3)
+plt.stem(wn,w,'r')
+plt.title('Señal w[n]')
+plt.grid()
+
+plt.figure(4)
+plt.stem(xn,conv1,'r')
+plt.title('Convolucón x[n]*v[n]')
+plt.grid()
+
+plt.figure(5)
+plt.stem(xn,conv2,'r')
+plt.title('Convolucón v[n]*w[n]')
+plt.grid()
+
+plt.figure(6)
+plt.stem(xn,conv3,'r')
+plt.title('Comvolucón x[n]*w[n]')
+plt.grid()
+
+
+plt.show()
