@@ -1,0 +1,54 @@
+# -----------------------------------------------------------
+# Laboratorio N° 3: Ejercicio 3.7
+# Correlación en tiempo discreto
+# -----------------------------------------------------------
+
+import numpy as np
+from scipy import signal
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+%matplotlib inline
+
+# Secuencia x[n]
+# ------------------------------------
+#RETRASO M=4
+m=4
+xn=np.linspace(0,70,71)
+x=np.zeros(m)
+x1=np.cos(0.2*np.pi*xn)
+x=np.append(x,x1[m:])
+
+#------------------------------------
+# Secuencia h[n]
+# ------------------------------------
+#RETRASO N=5
+n=5
+hn=np.linspace(0,70,71)
+h=np.zeros(n)
+h1=np.exp(-0.2*hn)
+h=np.append(h,h1[1:len(h1)-n+1])
+#------------------------------------
+# Correlación rxy[n]
+# ------------------------------------
+conv=np.convolve(x,h,'same')
+#--------------------------------------
+#GRAFICAMOS
+#--------------------------------------
+plt.figure(1)
+plt.stem(xn,x,'m')
+plt.title('Señal x[n]')
+plt.grid()
+
+plt.figure(2)
+plt.stem(hn,h,'r')
+plt.title('Señal h[n]')
+plt.grid()
+
+plt.figure(3)
+plt.stem(hn,conv,'r')
+plt.title('Convolución x[n]*h[n]')
+plt.grid()
+
+
+plt.show()
