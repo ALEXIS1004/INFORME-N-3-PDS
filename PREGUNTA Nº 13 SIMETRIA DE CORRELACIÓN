@@ -1,0 +1,50 @@
+# -----------------------------------------------------------
+# Laboratorio N° 3: Pregunta 3.13
+# Correlación en tiempo discreto
+# -----------------------------------------------------------
+
+import numpy as np
+from scipy import signal
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+%matplotlib inline
+
+# Secuencia x[n]
+# ------------------------------------
+x=np.zeros(7)
+x=np.append(x,[1,1,1])
+x=np.append(x,np.zeros(11))
+
+xn=np.linspace(-10,10,21)
+#------------------------------------
+# Secuencia espejo de x[n]
+# ------------------------------------
+xinv=np.zeros(len(x))
+for i in range(len(x)):
+  xinv[i]=x[len(x)-i-1]
+
+#------------------------------------
+# Secuencia y[n]
+# ------------------------------------
+y=np.zeros(11)
+y=np.append(y,[1,1,1])
+y=np.append(y,np.zeros(7))
+
+#------------------------------------
+# Secuencia espejo de y[n]
+# ------------------------------------
+yinv=np.zeros(len(y))
+for i in range(len(y)):
+  yinv[i]=y[len(y)-i-1]
+
+yn=np.linspace(-10,10,21)
+
+#--------------------------------------
+### 1) CORRELACIÓN Rxy
+#--------------------------------------
+corr1=np.convolve(xinv,y,'same')
+#--------------------------------------
+### 2) CORRELACIÓN Ryx
+#--------------------------------------
+corr2=n
