@@ -1,0 +1,36 @@
+# -----------------------------------------------------------
+# Laboratorio N° 3: Pregunta 3.13
+# Correlación en tiempo discreto
+# -----------------------------------------------------------
+
+import numpy as np
+from scipy import signal
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+%matplotlib inline
+
+# Secuencia x[n]
+# ------------------------------------
+#RETRASO M=1
+m=2
+xn=np.linspace(0,35,36)
+x=np.zeros(m)
+x1=np.exp(-0.2*xn)
+x=np.append(x,x1[m:])
+
+#------------------------------------
+# Secuencia espejo de x[n]
+# ------------------------------------
+xinv=np.zeros(len(x))
+for i in range(len(x)):
+  xinv[i]=x[len(x)-i-1]
+#------------------------------------
+# Secuencia y[n]
+# ------------------------------------
+#RETRASO N=5
+n=5
+yn=np.linspace(0,35,36)
+y=np.zeros(n)
+y1=np.cos(0.2*np.pi*yn)
+y=n
