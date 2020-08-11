@@ -1,0 +1,68 @@
+# -----------------------------------------------------------
+# Laboratorio N° 3: Ejercicio 3.11
+# Correlación en tiempo discreto
+# -----------------------------------------------------------
+
+# Secuencia x[n]
+# ------------------------------------
+import numpy as np
+from scipy import signal
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+%matplotlib inline
+x=np.zeros(7)
+x=np.append(x,[1,1,1])
+x=np.append(x,np.zeros(11))
+
+xn=np.linspace(-10,10,21)
+#------------------------------------
+# Secuencia espejo de x[n]
+# ------------------------------------
+xinv=np.zeros(len(x))
+for i in range(len(x)):
+  xinv[i]=x[len(x)-i-1]
+
+#------------------------------------
+# Secuencia y[n]
+# ------------------------------------
+y=np.zeros(11)
+y=np.append(y,[1,1,1])
+y=np.append(y,np.zeros(7))
+
+yn=np.linspace(-10,10,21)
+
+#------------------------------------
+# Correlación y[n]
+# ------------------------------------
+
+corr=np.convolve(xinv,y,'same')
+
+#--------------------------------------
+#GRAFICAMOS
+#--------------------------------------
+plt.figure(1)
+plt.stem(xn,x,'m')
+plt.title('Señal x[n]')
+plt.legend()
+plt.grid()
+
+plt.figure(2)
+plt.stem(xn,xinv,'m')
+plt.title('Señal espejo x[n]')
+plt.legend()
+plt.grid()
+
+plt.figure(3)
+plt.stem(yn,y,'b')
+plt.title('Señal y[n]')
+plt.legend()
+plt.grid()
+
+plt.figure(4)
+plt.stem(yn,corr,'r')
+plt.title('Correalación rxy[k]=y[k]*x[-k]')
+plt.legend()
+plt.grid()
+
+plt.show()
