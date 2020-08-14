@@ -1,29 +1,49 @@
+# -----------------------------------------------------------
+# Laboratorio N° 3: Ejercicio 3.2
+# Verificación de la linealidad de un sistema discreto
+# Determinar si el sistema:
+# y[n]=1/M{x[n]+x[n-1]+...+x[n-M-1]} es lineal
+# -----------------------------------------------------------
+# Generamos 2 secuencia arbitrarias con los mismos elementos
+
 from scipy import signal
 import matplotlib.pyplot as plt
 import math
 import numpy as np
-
+# Cantidad de elementos
 N=100
+# Vector
 nn= np.linspace(0,N-1,N)
+# Generamos señal 1
 xn1=0.5*nn
+# Generamos señal 2
 xn2=np.sin(2*math.pi*0.3*nn)
 
-
+# Determinamos los coeficientes
 alfa1=0.1
 alfa2=0.5
-
+# Número de puntos para evaluación del promedio
 M=8
 num = np.ones(M)
+## Cálculo del Promedio Móvil
+# yn1[n] = T{alfa1*xn1[n]}
 yn1=signal.lfilter(num,1,alfa1*xn1)/M
+# yn2[n] = T{alfa2*xn2[n]}
 yn2=signal.lfilter(num,1,alfa2*xn2)/M
+# Generamos una secuencia que sea una combinación lineal de ambas
+# x3[n] = alfa1*x1[n] + alfa2*x2[n]
 xn3 = alfa1*xn1+alfa2*xn2
+# Ahora calculamos la salida para la entrada x3[n]
+# yn3[n] = T{xn3[n]} = T{alfa1*xn1[n] + alfa2*xn2[n]}
 yn3=signal.lfilter(num,1,xn3)/M
-
+## Dibujo de las salidas
+# Dibujo de la salida de la suma de las entradas independientes.
 plt.figure(1)
 plt.plot(nn,yn3,'.')
 plt.xlabel('Time [n]')
 plt.ylabel('Señal Filtrada')
-
+# Dibujo de la suma de las salidas independientes
+# yn3s = T{alfa1*xn1[n]} + {alfa2*xn2[n]}
 plt.figure(2)
 yn3s = yn1 + yn2
 plt.plot(nn,yn3s,'.r')
