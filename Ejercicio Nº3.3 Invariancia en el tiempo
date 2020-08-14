@@ -1,12 +1,19 @@
+# -----------------------------------------------------------
+# Laboratorio N° 3: Ejercicio 3.3
+# Invariancia en el tiempo
+# Determinar si el sistema discreto Filtro Móvil es invariante
+# -----------------------------------------------------------
 from scipy import signal
 import matplotlib.pyplot as plt
 import math
 import numpy as np
-
+# Generación de la secuencia de entrada
 n = np.linspace(0,40,41)
+# Retardo de prueba
 k=3
+# Señal sinusoidal
 xn = np.cos(2*math.pi*0.0625*n)+np.cos(2*math.pi*0.625*n)
-
+# Número de puntos para evaluación del promedio móvil
 M=4
 
 xnk= np.concatenate((np.zeros(k),xn))
@@ -14,22 +21,28 @@ xnk.shape
 
 num = np.ones(M)
 den=1
-
+# Cálculo de la salida y[n]
 yn = signal.lfilter(num,den,xn)/M;
+# Calculo de la salida ynk[n]
 ynk = signal.lfilter(num,den,xnk)/M;
+# Cálculo de la diferencia entre las salidas: dif[n]=y[n]-y[n-k]
 difn = yn - ynk[k:41+k]
 
-plt.subplot(3,1,1)
-plt.plot(n,yn,'.')
+#Graficamos las salida
+plt.figure(1)
+plt.stem(n,yn)
 plt.xlabel('Time [n]')
-plt.ylabel('Señal Filtrada')
+plt.ylabel('Amplitud')
+plt.title('Señal Filtrada')
 
-plt.subplot(3,1,2)
-plt.plot(n,ynk[1:42],'.')
+plt.figure(2)
+plt.stem(n,ynk[1:42])
 plt.xlabel('Time [n]')
-plt.ylabel('Señal retardada')
+plt.ylabel('Amplitud')
+plt.title('Señal retardada')
 
-plt.subplot(3,1,3)
-plt.plot(n,difn,'.')
+plt.figure(3)
+plt.stem(n,difn)
 plt.xlabel('Time [n]')
-plt.ylabel('Señal diferencia')
+plt.ylabel('Amplitud')
+plt.title('Señal diferencia')
