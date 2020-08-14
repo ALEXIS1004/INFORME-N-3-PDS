@@ -1,37 +1,57 @@
+# ----------------------------------------------------
+# Laboratorio N°3 - Ejercicio N°3.1: Filtro Promedio
+# Móvil de M puntos.
+# ----------------------------------------------------
+
 from scipy import signal
 import matplotlib.pyplot as plt
 import math
 import numpy as np
 
-
-# Generación de la señal discreta de entrada
+## Generación de la señal discreta de entrada
+# Frecuencia de muestreo en Hz.
 fm = 8000
+# Periodo de muestreo en segundos
 Tm= 1/fm
+# frecuencia de la sinusoide en Hz.
 f = 100
+# Longitud de los datos del proceso
 N = int((0.1-Tm)/Tm)
 n = np.linspace(0,(0.1-Tm),num=N)
+# Sinusoide de baja frecuencia
 s=np.cos(2*math.pi*f*n)
+# Secuencia de ruido
 r=0.5*(0.5-np.random.rand(N))
+#suma de la señal con el ruido
 x = s+r
-# Implementación del Filtro Promedio Móvil
-M=8
-num =np.ones(M)
-y=signal.lfilter(num,1,x)/M;
 
-# Presentación de la señal discreta de la entrada y salida
-plt.subplot(2,2,1)
+## Implementación del Filtro Promedio Móvil
+# Longitud del dato deseado
+M=8
+num1=np.ones(M)
+# Cálculo del Promedio Móvil utilizando la función filter
+y=signal.lfilter(num1,1,x)/M;
+
+##Presentación de la señal discreta de la entrada y salida
+#Gráfica de la señal sinusoidal
+plt.figure(1)
 plt.plot(n, s,'-')
 plt.xlabel('Time [n]')
 plt.ylabel('Señal')
-plt.subplot(2,2,2)
+#Gráfica del ruido
+plt.figure(2)
 plt.plot(n, r,'.')
 plt.xlabel('Time [n]')
 plt.ylabel('Ruido')
-plt.subplot(2,2,3)
+#Gráfica de la señal ruidosa
+plt.figure(3)
 plt.plot(n, x,'.')
-plt.xlabel('Time [n]')
 plt.ylabel('Señal ruidosa')
-plt.subplot(2,2,4)
+plt.xlabel('Time [n]')
+plt.ylabel('Amplitud')
+#Gráfica del filtro con M=8
+plt.figure(4)
 plt.plot(n, y,'-')
 plt.xlabel('Time [n]')
-plt.ylabel('Señal Filtrada')
+plt.ylabel('Amplitud')
+plt.title('Señal Filtrada con M=8')
