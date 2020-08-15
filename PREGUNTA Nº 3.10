@@ -1,0 +1,49 @@
+# -----------------------------------------------------------
+# Laboratorio N° 3: Pregunta 3.10
+# Convolución en tiempo continuo
+# -----------------------------------------------------------
+import numpy as np
+from scipy import signal
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+%matplotlib inline
+
+# VECTOR DE TIEMPO
+t1=np.linspace(0,0.05,1000)
+# DEFINIMOS LA PRIMERA FUNCIÓN h(t)=e-(t/0.02)[u(t)-u(t-0.05)],
+x=np.exp(-50*t1);
+# VECTOR DE TIEMPO
+t2=np.linspace(-0.2,0.2,1000)
+# DEFINIMOS LA SEGUNDA FUNCIÓN x(t)=cos(200πt)
+h=np.cos(2*np.pi*200*t2)
+
+# Integral de Convolucion x[t]*h[t]
+y = np.convolve(x,h,'same')*0.005
+
+## GRAFICAMOS
+# SEÑAL x(t)
+plt.figure(1)
+plt.plot(t1,x,'b', label='x(t)')
+plt.title('Señal x(t)')
+plt.xlabel('t(s)')
+plt.ylabel('Amplitud')
+plt.legend()
+plt.grid()
+# SEÑAL h(t)
+plt.figure(2)
+plt.plot(t2,h,'r', label='h(t)')
+plt.title('Señal h(t)')
+plt.xlabel('t(s)')
+plt.ylabel('Amplitud')
+plt.legend()
+plt.grid()
+# SEÑAL CONVOLUCIÓN y(t)=x(t)*h(t)
+plt.figure(3)
+plt.plot(t1,y,'m', label='x(t)*h(t)')
+plt.title('Integral de Convolución y(t)=x(t)*h(t)')
+plt.xlabel('t(s)')
+plt.ylabel('Amplitud')
+plt.legend()
+plt.grid()
+plt.show()
