@@ -3,6 +3,7 @@
 # Correlación en tiempo discreto
 # -----------------------------------------------------------
 
+# IMPORTAMOS LIBRERIAS
 import numpy as np
 from scipy import signal
 import numpy as np
@@ -47,4 +48,33 @@ corr1=np.convolve(xinv,y,'same')
 #--------------------------------------
 ### 2) CORRELACIÓN Ryx
 #--------------------------------------
-corr2=n
+corr2=np.convolve(yinv,x,'same')
+
+## GRAFICAMOS
+plt.figure(1)
+plt.stem(xn,x)
+plt.title('Secuencia de x[n]')
+plt.xlabel('n seg')
+plt.ylabel('x[n]')
+plt.grid()
+
+plt.figure(2)
+plt.stem(xn,y)
+plt.title('Secuencia de y[n]')
+plt.xlabel('n seg')
+plt.ylabel('y[n]')
+plt.grid()
+
+plt.figure(3)
+plt.stem(xn,corr1)
+plt.title('Correlación Rxy[k]')
+plt.xlabel('n seg')
+plt.ylabel('Rxy[k]')
+plt.grid()
+
+plt.figure(4)
+plt.stem(xn,corr2)
+plt.title('Correlación Ryx[k]')
+plt.xlabel('n seg')
+plt.ylabel('Ryx[k]')
+plt.grid()
