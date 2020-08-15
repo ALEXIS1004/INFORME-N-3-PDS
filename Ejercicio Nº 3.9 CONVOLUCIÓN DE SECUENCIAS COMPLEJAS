@@ -11,59 +11,76 @@ import matplotlib.pyplot as plt
 import math
 %matplotlib inline
 
-# INGRESO
-
+# Amplitud
 A=1
+# Vector de muestras
 n=np.linspace(0,50,51)
+# Definimos la primera función
 x1=A*np.exp((complex(0,1)*n)/4)
-
-
+# Definimos la segunda función
 y1=A*np.exp((complex(0,1)*n)/6)
-# PROCEDIMIENTO
 
+# PROCEDIMIENTO
 # Integral de Convolucion x[t]*h[t]
 x = np.convolve(x1,y1,'same')
 
+# Grafica de la parte real de la señal x[n]
 plt.figure(1)
 plt.stem(n,np.real(x1),'b', label='parte real de x[n]')
 plt.title('Señal x[n]')
+plt.xlabel('n')
+plt.ylabel('Amplitud')
 plt.legend()
 plt.grid()
 
+# Grafica de la parte imaginaria de la señal x[n]
 plt.figure(2)
 plt.stem(n,np.imag(x1),'r', label='parte imaginaria de x[n]')
 plt.title('Señal x[n]')
+plt.xlabel('n')
+plt.ylabel('Amplitud')
 plt.legend()
 plt.grid()
 
+# Grafica de la parte real de la señal y[n]
 plt.figure(3)
 plt.stem(n,np.real(y1),'m', label='parte real de y[n]')
 plt.xlabel('n')
-plt.title('Señal h[n]')
+plt.title('Señal y[n]')
+plt.xlabel('n')
+plt.ylabel('Amplitud')
 plt.legend()
 plt.grid()
 
+# Grafica de la parte imaginaria de la señal h[n]
 plt.figure(4)
 plt.stem(n,np.imag(y1),'y', label='parte imaginaria de y[n]')
 plt.xlabel('n')
-plt.title('Señal h[n]')
+plt.title('Señal y[n]')
+plt.xlabel('n')
+plt.ylabel('Amplitud')
 plt.legend()
 plt.grid()
 
-
+# Grafica de la parte real de la señal x[n]*y[n]
 plt.figure(5)
 plt.stem(n,np.real(x),'m', label='parte real de convolución')
 plt.xlabel('n')
 plt.title('Convolución x[n]')
+plt.xlabel('n')
+plt.ylabel('Amplitud')
 plt.legend()
 plt.grid()
 
+# Grafica de la parte imaginaria de la señal x[n]*y[n]
 plt.figure(6)
 plt.stem(n,np.imag(x),'y', label='parte imaginaria de convolución')
 plt.xlabel('n')
 plt.title('Convolución x[n]')
+plt.xlabel('n')
+plt.ylabel('Amplitud')
 plt.legend()
 plt.grid()
 
-
+# Comando para mostrar las gráficas
 plt.show()
