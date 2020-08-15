@@ -3,6 +3,7 @@
 # Convolución en tiempo discreto
 # -----------------------------------------------------------
 
+#Importamos librerias
 import numpy as np
 from scipy import signal
 import numpy as np
@@ -51,37 +52,53 @@ conv2=np.convolve(v,w,'same')
 # ------------------------------------
 conv3=np.convolve(x,w,'same')
 
-#GRAFICAMOS
-#--------------------------------------
+## GRAFICAMOS
+# Señal x[n]
 plt.figure(1)
 plt.stem(xn,x,'m')
 plt.title('Señal x[n]')
+plt.xlabel('n')
+plt.ylabel('x[n]')
 plt.grid()
 
+# Señal v[n]
 plt.figure(2)
 plt.stem(vn,v,'r')
 plt.title('Señal v[n]')
+plt.xlabel('n')
+plt.ylabel('v[n]')
 plt.grid()
 
+# Señal w[n]
 plt.figure(3)
 plt.stem(wn,w,'r')
 plt.title('Señal w[n]')
+plt.xlabel('n')
+plt.ylabel('w[n]')
 plt.grid()
 
+# Señal x[n]*v[n]
 plt.figure(4)
 plt.stem(xn,conv1,'r')
-plt.title('Convolucón x[n]*v[n]')
+plt.title('Convolución x[n]*v[n]')
+plt.xlabel('n')
+plt.ylabel('x[n]*v[n]')
 plt.grid()
 
+# Señal v[n]*w[n]
 plt.figure(5)
 plt.stem(xn,conv2,'r')
 plt.title('Convolucón v[n]*w[n]')
+plt.xlabel('n')
+plt.ylabel('v[n]*w[n]')
 plt.grid()
 
+# Señal x[n]*w[n]
 plt.figure(6)
 plt.stem(xn,conv3,'r')
-plt.title('Comvolucón x[n]*w[n]')
+plt.title('Comvolución x[n]*w[n]')
+plt.xlabel('n')
+plt.ylabel('x[n]*w[n]')
 plt.grid()
-
-
+# Comando para mostrar los gráficos
 plt.show()
