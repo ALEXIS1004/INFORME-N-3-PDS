@@ -3,6 +3,7 @@
 # Correlación en tiempo discreto
 # -----------------------------------------------------------
 
+#Importamos las librerias
 import numpy as np
 from scipy import signal
 import numpy as np
@@ -12,11 +13,14 @@ import math
 
 # Secuencia x[n]
 # ------------------------------------
-#RETRASO M=1
+#RETRASO M=2
 m=2
+#Definimos el vector xn
 xn=np.linspace(0,35,36)
 x=np.zeros(m)
+#Defninimos la función 1
 x1=np.exp(-0.2*xn)
+#Defninimos la función con retraso
 x=np.append(x,x1[m:])
 
 #------------------------------------
@@ -30,7 +34,53 @@ for i in range(len(x)):
 # ------------------------------------
 #RETRASO N=5
 n=5
+#Definimos el vector yn
 yn=np.linspace(0,35,36)
 y=np.zeros(n)
+#Defninimos la función 2
 y1=np.cos(0.2*np.pi*yn)
-y=n
+#Defninimos la función con retraso
+y=np.append(y,y1[n:])
+
+#------------------------------------
+# Correlación Rxy
+# ------------------------------------
+corr=np.convolve(xinv,y,'same')
+
+#--------------------------------------
+#GRAFICAMOS
+#--------------------------------------
+# Grafica de la señal x[n]
+plt.figure(1)
+plt.stem(xn,x,'m')
+plt.title('Señal x[n]')
+plt.xlabel('n')
+plt.ylabel('Amplitud')
+plt.grid()
+
+# Grafica de la señal espejo de x[n]
+plt.figure(2)
+plt.stem(xn,xinv,'m')
+plt.title('Señal espejo x[n]')
+plt.xlabel('n')
+plt.ylabel('Amplitud')
+plt.grid()
+
+# Grafica de la señal y[n]
+plt.figure(3)
+plt.stem(yn,y,'b')
+plt.title('Señal y[n]')
+plt.xlabel('n')
+plt.ylabel('Amplitud')
+plt.grid()
+
+# Grafica de la correlación Rxy
+plt.figure(4)
+plt.stem(yn,corr,'r')
+plt.title('Correlación rxy[k]=y[k]*x[-k]')
+plt.xlabel('n')
+plt.ylabel('Amplitud')
+plt.grid()
+
+# Comando para mostrar las gráficas
+plt.show()
