@@ -3,6 +3,7 @@
 # Correlación en tiempo discreto
 # -----------------------------------------------------------
 
+# Importamos librerias
 import numpy as np
 from scipy import signal
 import numpy as np
@@ -12,10 +13,11 @@ import math
 
 # Secuencia x[n]
 # ------------------------------------
+# Eje vertical
 x=np.zeros(7)
 x=np.append(x,[1,1,1])
 x=np.append(x,np.zeros(11))
-
+# Eje horizontal
 xn=np.linspace(-10,10,21)
 #------------------------------------
 # Secuencia espejo de x[n]
@@ -27,10 +29,11 @@ for i in range(len(x)):
 #------------------------------------
 # Secuencia y[n]
 # ------------------------------------
+# Eje vertical
 y=np.zeros(11)
 y=np.append(y,[1,1,1])
 y=np.append(y,np.zeros(7))
-
+# Eje horizontal
 yn=np.linspace(-10,10,21)
 
 #------------------------------------
@@ -42,28 +45,25 @@ corr=np.convolve(xinv,y,'same')
 #--------------------------------------
 #GRAFICAMOS
 #--------------------------------------
+# Grafica de la señal x[n]
 plt.figure(1)
 plt.stem(xn,x,'m')
 plt.title('Señal x[n]')
-plt.legend()
+plt.xlabel('n')
+plt.ylabel('Amplitud')
 plt.grid()
 
+# Grafica de la señal espejo de x[n]
 plt.figure(2)
 plt.stem(xn,xinv,'m')
 plt.title('Señal espejo x[n]')
-plt.legend()
+plt.xlabel('n')
+plt.ylabel('Amplitud')
 plt.grid()
 
+# Grafica de la señal y[n]
 plt.figure(3)
 plt.stem(yn,y,'b')
 plt.title('Señal y[n]')
-plt.legend()
-plt.grid()
-
-plt.figure(4)
-plt.stem(yn,corr,'r')
-plt.title('Correalación rxy[k]=y[k]*x[-k]')
-plt.legend()
-plt.grid()
-
-plt.show()
+plt.xlabel('n')
+plt.y
